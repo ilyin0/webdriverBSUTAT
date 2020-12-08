@@ -29,7 +29,7 @@ public class RestaurantsPageTest {
     }
 
     @Test
-    public void testIsAvailableDeliveryAddress() throws InterruptedException {
+    public void testIsAvailableDeliveryAddress() {
         WebElement form = driver.findElement(By.xpath("//form[@class=\"store-locator__form\"]"));
 
         WebElement streetInputDiv = form.findElement(By.xpath("//div[./div[1]/text()=\"Улица\"]"));
@@ -41,12 +41,8 @@ public class RestaurantsPageTest {
         WebElement houseNumberInputDiv = form.findElement(By.xpath("//div[./div[1]/text()=\"Номер дома\"]"));
         houseNumberInputDiv.findElement(By.tagName("input")).sendKeys("37");
 
-        Thread.sleep(2000);
-
         WebElement checkAvailability = driver.findElement(By.xpath("//button[text()=\"Проверить\"]"));
         checkAvailability.click();
-
-        Thread.sleep(5000);
 
         Assert.assertEquals(checkAvailability.getText(), "Адрес в зоне доставки");
         Assert.assertEquals(driver.findElement(By.xpath("//div[@class=\"notification\"]/div[@class=\"notification__title\"]")).getText(), "Вы находитесь в зоне доставки");
