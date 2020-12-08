@@ -41,10 +41,12 @@ public class RestaurantsPageTest {
         WebElement houseNumberInputDiv = form.findElement(By.xpath("//div[./div[1]/text()=\"Номер дома\"]"));
         houseNumberInputDiv.findElement(By.tagName("input")).sendKeys("37");
 
-        WebElement checkAvailability = driver.findElement(By.xpath("//button[text()=\"Проверить\"]"));
-        checkAvailability.click();
+        WebElement checkAvailabilityButton = driver.findElement(By.xpath("//form[@class=\"store-locator__form\"]/button"));
+        checkAvailabilityButton.click();
 
-        Assert.assertEquals(checkAvailability.getText(), "Адрес в зоне доставки");
+        new WebDriverWait(driver, 2).until(d-> checkAvailabilityButton.getText().equals("Адрес в зоне доставки"));
+
+        Assert.assertEquals(checkAvailabilityButton.getText(), "Адрес в зоне доставки");
         Assert.assertEquals(driver.findElement(By.xpath("//div[@class=\"notification\"]/div[@class=\"notification__title\"]")).getText(), "Вы находитесь в зоне доставки");
 
     }
